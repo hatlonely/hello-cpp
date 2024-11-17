@@ -1,0 +1,59 @@
+FROM ubuntu:22.04
+
+# 设置时区
+ENV TZ=Asia/Shanghai
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+# 设置中文环境
+RUN apt-get update && apt-get install -y locales && \
+    locale-gen zh_CN.UTF-8 && \
+    update-locale LANG=zh_CN.UTF-8
+
+ENV LANG=zh_CN.UTF-8
+ENV LANGUAGE=zh_CN:zh
+ENV LC_ALL=zh_CN.UTF-8
+
+# 安装必要的软件包
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    curl \
+    wget \
+    git \
+    vim \
+    jq \
+    tree \
+    libssl-dev \
+    openssl \
+    openssh-client \
+    unzip \
+    pkg-config \
+    docker.io
+
+# 安装 zsh
+RUN apt install -y zsh
+RUN sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)" --unattended && \
+    echo 'alias vi=vim' >> /root/.zshrc
+RUN git clone https://github.com/zsh-users/zsh-completions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-completions && \
+    git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions && \
+    sed -i 's/plugins=(git)/plugins=(git zsh-completions zsh-autosuggestions)/g' /root/.zshrc
+
+# git 设置
+RUN git config --global --add safe.directory /app && \
+    git config --global core.editor vim && \
+    git config --global core.quotepath false && \
+    git config --global core.precomposeunicode true && \
+    git config --global i18n.commitEncoding utf-8 && \
+    git config --global i18n.logOutputEncoding utf-8 && \
+    git config --global i18n.statusOutputEncoding utf-8 && \
+    git config --global gui.encoding utf-8
+
+# 安装 c++ 开发环境
+RUN apt install -y \
+    bison \
+    libtool \
+    make \
+    automake \
+    autoconf \
+    lcov \
+    valgrind \
+    gdb

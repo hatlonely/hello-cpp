@@ -2,6 +2,13 @@
   "dependencies": [
     "fmt",
     "gtest",
-    "vit-vit-ctpl"
+    "vit-vit-ctpl",
+    "grpc"
+  ],
+  "overrides": [
+    {
+      "name": "grpc",
+      "version": "1.65.5"
+    }
   ]
 }

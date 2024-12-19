@@ -5,12 +5,17 @@ project(HelloCPP)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-find_package(fmt CONFIG REQUIRED)
 enable_testing()
 find_package(GTest CONFIG REQUIRED)
 
+find_package(fmt CONFIG REQUIRED)
+find_package(gRPC CONFIG REQUIRED)
+find_package(protobuf CONFIG REQUIRED)
+
 SET(LIBS
     fmt::fmt
+    protobuf::libprotoc protobuf::libprotobuf protobuf::libprotobuf-lite
+    gRPC::gpr gRPC::grpc gRPC::grpc++ gRPC::grpc++_alts
     GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main
 )
 

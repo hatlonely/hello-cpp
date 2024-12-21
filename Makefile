@@ -20,6 +20,8 @@ endif
 
 image-dev:
 	docker build \
+		--build-arg HTTP_PROXY=172.25.144.1:7080 \
+		--build-arg HTTPS_PROXY=172.25.144.1:7080 \
 		-t $(REGISTRY_ENDPOINT)/$(REGISTRY_NAMESPACE)/$(REPOSITORY_DEV):$(VERSION) \
 		-f Dockerfile.dev .
 

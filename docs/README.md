@@ -1,0 +1,15 @@
+- 开发环境-vscode
+- 构建工具-cmake
+- 包管理工具-vcpkg
+- 代码风格-clang-format
+- 单元测试-google test
+- 性能测试-google benchmark
+- 代码覆盖率-gcov
+- 静态代码检查-cppcheck
+- 动态代码检查-valgrind
+- 面相切面编程
+- gRPC框架
+- 配置
+- trace/metrics/logging
+- 线程池
+- 现代C++特性

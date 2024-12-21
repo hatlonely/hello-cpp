@@ -37,3 +37,9 @@ dev-env:
 		--name $(REPOSITORY_DEV) \
 		$(REGISTRY_ENDPOINT)/$(REGISTRY_NAMESPACE)/$(REPOSITORY_DEV):$(VERSION) \
 		tail -f /dev/null
+
+preset:
+	cmake --preset=default
+
+build:
+	cmake --build build
